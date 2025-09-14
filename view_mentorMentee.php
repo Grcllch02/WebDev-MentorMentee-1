@@ -18,13 +18,13 @@ $mentors = viewMentor();
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="true" href="view_mentor.php">Mentor List</a>
+                        <a class="nav-link" aria-current="true" href="view_mentor.php">Mentor List</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="">Mentee List</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="view_mentorMentee.php">Mentor-Mentee</a>
+                        <a class="nav-link  active" href="view_mentorMentee.php">Mentor-Mentee</a>
                     </li>
                 </ul>
             </div>
@@ -49,12 +49,13 @@ $mentors = viewMentor();
                                 <td>
                                     <a href="view_editmentor.php?updateID=<?=$mentor1['mentor_id']?>" class="btn btn-warning">Edit</a>
                                     <a href="controller.php?deleteID=<?=$mentor1['mentor_id']?>"><button class="btn btn-danger" onclick="return confirm('Yakin mau hapus mentor ini?');">Delete</button></a>
+                                    
+                                    <a href="view_addmentor.php" class="btn btn-success">Add</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
-                <a href="view_addmentor.php" class="btn btn-success">Add Mentor</a>
             </div>
         </div>
 </body>
