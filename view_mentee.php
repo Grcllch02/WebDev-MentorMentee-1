@@ -48,7 +48,7 @@ $mentees = viewMentee();
                                 <td><?= $mentee1['no_telepon'] ?></td>
                                 <td>
                                     <a href="view_editmentee.php?updateID=<?=$mentee1['mentee_id']?>" class="btn btn-warning">Edit</a>
-                                    <a href="controller.php?deleteIDmentee=<?=$mentee1['mentee_id']?>"><button class="btn btn-danger" onclick="return confirm('Yakin mau hapus mentee ini?');">Delete</button></a>
+                                    <a href="controller.php?deleteID=<?=$mentee1['mentee_id']?>"><button class="btn btn-danger" onclick="return confirm('Yakin mau hapus mentee ini?');">Delete</button></a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

@@ -150,25 +150,4 @@ function viewMentee(){
     mysqli_close($conn);
     return $menteelist;
 }
-
-function deleteMentee($id){
-    $conn = my_connectDB();
-
-    $sql = "DELETE from mentee WHERE mentee_id = $id";
-
-    if(mysqli_query($conn, $sql)){
-        
-    }else{
-        echo "Error: " . mysqli_error($conn);
-    }
-
-    mysqli_close($conn);
-}
-
-if(isset($_GET['deleteIDmentee'])){
-    $id = $_GET['deleteIDmentee'];
-    deleteMentee($id);
-    header("Location:view_mentee.php");
-}
-
 ?>
