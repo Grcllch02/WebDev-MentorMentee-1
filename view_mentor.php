@@ -19,6 +19,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="">Mentee List</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Mentor-Mentee</a>
+                    </li>
                 </ul>
             </div>
             <div class="card-body">
@@ -29,8 +32,8 @@
                             <th scope="col">Nama</th>
                             <th scope="col">Jurusan</th>
                             <th scope="col">Nomor Telepon</th>
-                            <th scope="col">Action</th>
                             <th>Note</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -41,8 +44,10 @@
                             <td>@mdo</td>
                             <td>@mdo</td>
                             <td>
-                                <button class="btn btn-warning">Update</button>
-                                <button class="btn btn-danger">Delete</button>
+                                <a href="" class="btn btn-warning">Update</a>
+                                <a href="" class="btn btn-danger">Delete</a>
+                                <a href="" class="btn btn-primary">Edit</a>
+                                <a href="view_addmentor.php" class="btn btn-success">Add</a>
                             </td>
                         </tr>
                     </tbody>
