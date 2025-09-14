@@ -40,19 +40,7 @@ $mentors = viewMentor();
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($mentors as $mentor1): ?>
-                            <tr>
-                                <td><?= $mentor1['mentor_id'] ?></td>
-                                <td><?= $mentor1['nama'] ?></td>
-                                <td><?= $mentor1['jurusan'] ?></td>
-                                <td><?= $mentor1['no_telepon'] ?></td>
-                                <td>
-                                    <a href="view_editmentor.php?updateID=<?=$mentor1['mentor_id']?>" class="btn btn-warning">Edit</a>
-                                    <a href="controller.php?deleteID=<?=$mentor1['mentor_id']?>"><button class="btn btn-danger" onclick="return confirm('Yakin mau hapus mentor ini?');">Delete</button></a>
-                                    
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
+                        
                     </tbody>
                 </table>
                 <a href="view_addmentor.php" class="btn btn-success">Save</a>
