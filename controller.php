@@ -71,4 +71,41 @@ if(isset($_GET['deleteID'])){
     header("Location:view_mentor.php");
 }
 
+function getMentorWithID($mentorID){
+    $conn = my_connectDB();
+
+    $sql = "SELECT * FROM mentor WHERE mentor_id = $mentorID";
+    $result = mysqli_query($conn, $sql);
+
+    $mentor = null;
+    if ($result && mysqli_num_rows($result) > 0) {
+        $mentor = mysqli_fetch_assoc($result); 
+    }
+
+    mysqli_close($conn);
+    return $mentor;
+}
+
+function updateMentor($mentor_id){
+    $conn = my_connectDB();
+
+    $mentor = new model_mentor();
+    $mentor->nama = $_POST['inputNama'];
+    $mentor->jurusan = $_POST['inputJurusan'];
+    $mentor->no_tlpn= $_POST['inputTelepon'];
+
+    $sql = "UPDATE mentor set nama='$mentor->nama', jurusan='$mentor->jurusan', no_telepon='$mentor->no_tlpn' WHERE mentor_id = $mentor_id";
+
+    if(mysqli_query($conn, $sql)) {
+        mysqli_close($conn);
+    } else {
+        echo "Error: " . mysqli_error($conn);
+    }
+}
+
+if(isset($_POST['button_updateMentor'])){
+    $id = $_POST['input_id'];
+    updateMentor($id);
+    header("Location:view_mentor.php");
+}
 ?>
