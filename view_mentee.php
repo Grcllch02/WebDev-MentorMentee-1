@@ -1,6 +1,4 @@
-<?php require("controller.php"); 
-$mentors = viewMentor();
-?>
+<?php require("controller.php"); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,10 +16,10 @@ $mentors = viewMentor();
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="true" href="view_mentor.php">Mentor List</a>
+                        <a class="nav-link " aria-current="true" href="view_mentor.php">Mentor List</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="view_mentee.php">Mentee List</a>
+                        <a class="nav-link active" href="view_mentee.php">Mentee List</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="view_mentorMentee.php">Mentor-Mentee</a>
@@ -29,7 +27,7 @@ $mentors = viewMentor();
                 </ul>
             </div>
             <div class="card-body">
-                <h1>Mentor</h1>
+                <h1>Mentee</h1>
                 <table class="table">
                     <thead class="table-dark">
                         <tr>
@@ -41,23 +39,38 @@ $mentors = viewMentor();
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($mentors as $mentor1): ?>
+                        <?php
+                        $counter = 0;
+                        $allmemntee = getAllMentee();
+                        foreach ($allmemntee as $index => $mentee) {
+                            $counter++;
+                        ?>
+
                             <tr>
-                                <td><?= $mentor1['mentor_id'] ?></td>
-                                <td><?= $mentor1['nama'] ?></td>
-                                <td><?= $mentor1['jurusan'] ?></td>
-                                <td><?= $mentor1['no_telepon'] ?></td>
+                                <th scope="row"><?= $counter ?></th>
+                                <td><?= $mentee['nama'] ?></td> <!-- sm kek yg di model name,dkk -->
+                                <td><?= $mentee['jurusan'] ?></td>
+                                <td><?= $mentee['no_telepon'] ?></td>
                                 <td>
-                                    <a href="view_editmentor.php?updateID=<?=$mentor1['mentor_id']?>" class="btn btn-warning">Edit</a>
-                                    <a href="controller.php?deleteID=<?=$mentor1['mentor_id']?>"><button class="btn btn-danger" onclick="return confirm('Yakin mau hapus mentor ini?');">Delete</button></a>
+                                    <a href="view_updatementee.php?updateMenteeID=<?= $mentee['mentee_id'] ?>">
+                                        <button class="btn btn-warning">Update</button>
+                                    </a>
+                                    <a href="controller.php?deleteMenteeID=<?= $mentee['mentee_id'] ?>"> <!-- klo lgsg tulis ?deleteID gitu itu pake method get yg bakal tampil di url -->
+                                        <button class="btn btn-danger">Delete</button>
+                                    </a>
                                 </td>
                             </tr>
-                        <?php endforeach; ?>
+
+                        <?php
+                        }
+                        ?>
+
                     </tbody>
                 </table>
-                <a href="view_addmentor.php" class="btn btn-success">Add Mentor</a>
+                <a href="view_addmentee.php" class="btn btn-success">Add Mentee</a>
             </div>
         </div>
+    </div>
 </body>
 
 </html>
