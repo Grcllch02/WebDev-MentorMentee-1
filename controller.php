@@ -171,4 +171,42 @@ if(isset($_GET['deleteIDmentee'])){
     header("Location:view_mentee.php");
 }
 
+function getMenteeWithID($menteeID){
+    $conn = my_connectDB();
+
+    $sql = "SELECT * FROM mentee WHERE mentee_id = $menteeID";
+    $result = mysqli_query($conn, $sql);
+
+    $mentee = null;
+    if ($result && mysqli_num_rows($result) > 0) {
+        $mentee = mysqli_fetch_assoc($result); 
+    }
+
+    mysqli_close($conn);
+    return $mentee;
+}
+
+function updateMentee($mentee_id){
+    $conn = my_connectDB();
+
+    $mentee = new model_mentee();
+    $mentee->nama = $_POST['inputNama'];
+    $mentee->jurusan = $_POST['inputJurusan'];
+    $mentee->no_tlpn= $_POST['inputTelepon'];
+
+    $sql = "UPDATE mentee set nama='$mentee->nama', jurusan='$mentee->jurusan', no_telepon='$mentee->no_tlpn' WHERE mentee_id = $mentee_id";
+
+    if(mysqli_query($conn, $sql)) {
+        mysqli_close($conn);
+    } else {
+        echo "Error: " . mysqli_error($conn);
+    }
+}
+
+if(isset($_POST['button_updateMentee'])){
+    $id = $_POST['input_id'];
+    updateMentee($id);
+    header("Location:view_mentee.php");
+}
+
 ?>
