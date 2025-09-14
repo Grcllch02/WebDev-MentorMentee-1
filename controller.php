@@ -108,22 +108,4 @@ if(isset($_POST['button_updateMentor'])){
     updateMentor($id);
     header("Location:view_mentor.php");
 }
-
-// MENTEEE
-function viewMentee(){
-    $conn = my_connectDB();
-
-    $sql = "SELECT * FROM mentee";
-    $result = mysqli_query($conn, $sql);
-
-    $menteelist = [];
-    if($result && mysqli_num_rows($result) > 0){
-        while ($row = mysqli_fetch_assoc($result)) {
-            $menteelist[] = $row;
-        }
-    }
-
-    mysqli_close($conn);
-    return $menteelist;
-}
 ?>
