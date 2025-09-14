@@ -21,7 +21,7 @@ $mentors = viewMentor();
                         <a class="nav-link" aria-current="true" href="view_mentor.php">Mentor List</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">Mentee List</a>
+                        <a class="nav-link" href="view_mentee.php">Mentee List</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link  active" href="view_mentorMentee.php">Mentor-Mentee</a>
@@ -50,7 +50,7 @@ $mentors = viewMentor();
                                     <a href="view_editmentor.php?updateID=<?=$mentor1['mentor_id']?>" class="btn btn-warning">Edit</a>
                                     <a href="controller.php?deleteID=<?=$mentor1['mentor_id']?>"><button class="btn btn-danger" onclick="return confirm('Yakin mau hapus mentor ini?');">Delete</button></a>
                                     
-                                    <a href="view_addmentor.php" class="btn btn-success">Add</a>
+                                    <a href="view_addmentor.php" class="btn btn-success">Save</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

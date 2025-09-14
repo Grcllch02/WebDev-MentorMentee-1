@@ -1,5 +1,5 @@
 <?php require("controller.php"); 
-$mentors = viewMentor();
+$mentees = viewMentee();
 ?>
 
 <!DOCTYPE html>
@@ -18,10 +18,10 @@ $mentors = viewMentor();
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="true" href="view_mentor.php">Mentor List</a>
+                        <a class="nav-link" aria-current="true" href="view_mentor.php">Mentor List</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="view_mentee.php">Mentee List</a>
+                        <a class="nav-link active" href="view_mentee.php">Mentee List</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="view_mentorMentee.php">Mentor-Mentee</a>
@@ -40,21 +40,21 @@ $mentors = viewMentor();
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($mentors as $mentor1): ?>
+                        <?php foreach ($mentees as $mentee1): ?>
                             <tr>
-                                <td><?= $mentor1['mentor_id'] ?></td>
-                                <td><?= $mentor1['nama'] ?></td>
-                                <td><?= $mentor1['jurusan'] ?></td>
-                                <td><?= $mentor1['no_telepon'] ?></td>
+                                <td><?= $mentee1['mentor_id'] ?></td>
+                                <td><?= $mentee1['nama'] ?></td>
+                                <td><?= $mentee1['jurusan'] ?></td>
+                                <td><?= $mentee1['no_telepon'] ?></td>
                                 <td>
-                                    <a href="view_editmentor.php?updateID=<?=$mentor1['mentor_id']?>" class="btn btn-warning">Edit</a>
-                                    <a href="controller.php?deleteID=<?=$mentor1['mentor_id']?>"><button class="btn btn-danger" onclick="return confirm('Yakin mau hapus mentor ini?');">Delete</button></a>
+                                    <a href="view_editmentor.php?updateID=<?=$mentee1['mentee_id']?>" class="btn btn-warning">Edit</a>
+                                    <a href="controller.php?deleteID=<?=$mentor1['mentee_id']?>"><button class="btn btn-danger" onclick="return confirm('Yakin mau hapus mentee ini?');">Delete</button></a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
-                <a href="view_addmentor.php" class="btn btn-success">Add Mentor</a>
+                <a href="view_addmentee.php" class="btn btn-success">Add Mentee</a>
             </div>
         </div>
 </body>
