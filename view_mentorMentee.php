@@ -32,11 +32,8 @@ $mentors = viewMentor();
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Nama</th>
-                            <th scope="col">Jurusan</th>
-                            <th scope="col">Nomor Telepon</th>
-                            <th scope="col">Action</th>
+                            <th scope="col">Mentor</th>
+                            <th scope="col">Mentee</th>
                         </tr>
                     </thead>
                     <tbody>

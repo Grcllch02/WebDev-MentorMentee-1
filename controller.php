@@ -26,7 +26,6 @@ function createMentor(){
     } else {
         echo "Error: " . mysqli_error($conn);
     }
-    
 }
 
 if (isset($_POST['button_registerMentor'])) {
