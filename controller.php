@@ -9,6 +9,7 @@ function my_connectDB(){
 }
 
 include("model_mentor.php");
+include("model_mentee.php");
 
 function createMentor(){
     $conn = my_connectDB();
@@ -110,6 +111,29 @@ if(isset($_POST['button_updateMentor'])){
 }
 
 // MENTEEE
+function createMentee(){
+    $conn = my_connectDB();
+
+    $mentee = new model_mentee();
+    $mentee->nama = $_POST['inputNama'];
+    $mentee->jurusan = $_POST['inputJurusan'];
+    $mentee->no_tlpn= $_POST['inputTelepon'];
+
+    $sql = "INSERT INTO mentee(nama, jurusan, no_telepon) VALUES ('$mentee->nama', '$mentee->jurusan', '$mentee->no_tlpn')";
+
+    if (mysqli_query($conn, $sql)) {
+        mysqli_close($conn);
+    } else {
+        echo "Error: " . mysqli_error($conn);
+    }
+    
+}
+
+if (isset($_POST['button_registerMentee'])) {
+    createMentee();
+    header("Location:view_mentee.php");  
+}
+
 function viewMentee(){
     $conn = my_connectDB();
 
