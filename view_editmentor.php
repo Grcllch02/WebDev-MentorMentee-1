@@ -34,7 +34,8 @@ if(isset($_GET["updateID"])){
                         <label for="inputTelepon" class="form-label">Nomor Telepon</label>
                         <input type="tel" class="form-control" name="inputTelepon" value="<?=$mentor['no_telepon']?>">
                     </div>
-                    
+
+                    <input type="hidden" name="input_id" value="<?=$mentor_id?>">
                     <a href="view_mentor.php" class="btn btn-danger">Back</a>
                     <button name="button_updateMentor" type="submit" class="btn btn-primary">Save</button>
                 </form>
