@@ -49,13 +49,12 @@ $mentors = viewMentor();
                                 <td>
                                     <a href="view_editmentor.php?updateID=<?=$mentor1['mentor_id']?>" class="btn btn-warning">Edit</a>
                                     <a href="controller.php?deleteID=<?=$mentor1['mentor_id']?>"><button class="btn btn-danger" onclick="return confirm('Yakin mau hapus mentor ini?');">Delete</button></a>
-                                    
-                                    <a href="view_addmentor.php" class="btn btn-success">Save</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
+                <a href="view_addmentor.php" class="btn btn-success">Save</a>
             </div>
         </div>
 </body>
