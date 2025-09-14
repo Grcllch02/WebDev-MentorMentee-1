@@ -13,25 +13,21 @@
         <div class="card text-center">
             <div class="card-body">
                 <h1>New Mentor</h1>
-                <form>
+                <form method="POST" action="controller.php">
                     <div class="mb-3">
-                        <label for="inputName" class="form-label">Name</label>
-                        <input type="name" class="form-control" id="inputName">
+                        <label for="inputName" class="form-label">Nama</label>
+                        <input type="text" class="form-control" name="inputNama">
                     </div>
                     <div class="mb-3">
-                        <label for="inputPhone" class="form-label">Phone</label>
-                        <input type="phone" class="form-control" id="inputPhone">
+                        <label for="inputJurusan" class="form-label">Jurusan</label>
+                        <input type="text" class="form-control" name="inputJurusan">
                     </div>
                     <div class="mb-3">
-                        <label for="inputEmail" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="inputEmail">
-                    </div>
-                    <div class="mb-3">
-                        <label for="inputNote" class="form-label">Note</label>
-                        <input type="note" class="form-control" id="inputNote">
+                        <label for="inputTelepon" class="form-label">Nomor Telepon</label>
+                        <input type="tel" class="form-control" name="inputTelepon">
                     </div>
                     <a href="view_mentor.php" class="btn btn-danger">Back</a>
-                    <a href="" class="btn btn-primary">Submit</a>
+                    <button name="button_registerMentor" type="submit" class="btn btn-primary">Register</button>
                 </form>
             </div>
         </div>
