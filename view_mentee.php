@@ -1,4 +1,4 @@
-<?php require("controller.php"); ?>
+<?php require("controller.php"); ?> <!--require itu buat ngenali doang. include itu smua ditambain ke view mentee -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -39,33 +39,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                        $counter = 0;
+                        <?php 
                         $allmemntee = getAllMentee();
-                        foreach ($allmemntee as $index => $mentee) {
-                            $counter++;
-                        ?>
-
+                        foreach ($allmemntee as $mentee): ?>
                             <tr>
-                                <th scope="row"><?= $counter ?></th>
-                                <td><?= $mentee['nama'] ?></td> <!-- sm kek yg di model name,dkk -->
+                                <td><?= $mentee['mentee_id'] ?></td>
+                                <td><?= $mentee['nama'] ?></td>
                                 <td><?= $mentee['jurusan'] ?></td>
                                 <td><?= $mentee['no_telepon'] ?></td>
                                 <td>
-                                    <a href="view_updatementee.php?updateMenteeID=<?= $mentee['mentee_id'] ?>">
-                                        <button class="btn btn-warning">Update</button>
-                                    </a>
-                                    <a href="controller.php?deleteMenteeID=<?= $mentee['mentee_id'] ?>"> <!-- klo lgsg tulis ?deleteID gitu itu pake method get yg bakal tampil di url -->
-                                        <button class="btn btn-danger">Delete</button>
-                                    </a>
+                                    <a href="view_updatementee.php?updateMenteeID=<?=$mentee['mentee_id']?>" class="btn btn-warning">Update</a>
+                                    <a href="controller.php?deleteMenteeID=<?=$mentee['mentee_id']?>"><button class="btn btn-danger" onclick="return confirm('Yakin mau hapus mentee ini?');">Delete</button></a>
                                 </td>
                             </tr>
-
-                        <?php
-                        }
-                        ?>
-
+                        <?php endforeach; ?>
                     </tbody>
+
+                    
                 </table>
                 <a href="view_addmentee.php" class="btn btn-success">Add Mentee</a>
             </div>
