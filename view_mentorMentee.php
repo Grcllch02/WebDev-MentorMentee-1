@@ -1,6 +1,6 @@
 <?php require("controller.php");
 $mentors = viewMentor();
-// $mentees = viewMentee();
+$mentees = getAllMentee();
 $mentormentee = viewMentorMentee();
 ?>
 
