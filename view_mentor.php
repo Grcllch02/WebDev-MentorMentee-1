@@ -17,7 +17,7 @@
                         <a class="nav-link active" aria-current="true" href="view_mentor.php">Mentor List</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">Add Member</a>
+                        <a class="nav-link" href="">Mentee List</a>
                     </li>
                 </ul>
             </div>
