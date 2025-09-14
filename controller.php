@@ -107,4 +107,24 @@ if(isset($_POST['button_updateMentor'])){
     updateMentor($id);
     header("Location:view_mentor.php");
 }
+
+function viewMentorMentee(){
+    $conn = my_connectDB();
+
+    $sql = "SELECT ms.id, m.nama AS mentor_nama, t.nama AS mentee_nama
+            FROM mentormentee ms
+            JOIN mentor m ON ms.mentor_id = m.mentor_id
+            JOIN mentee t ON ms.mentee_id = t.mentee_id";
+    $result = mysqli_query($conn, $sql);
+
+    $mentormenteelist = [];
+    if($result && mysqli_num_rows($result) > 0){
+        while ($row = mysqli_fetch_assoc($result)) {
+            $mentormenteelist[] = $row;
+        }
+    }
+
+    mysqli_close($conn);
+    return $mentormenteelist;
+}
 ?>
