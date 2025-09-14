@@ -70,7 +70,8 @@ $mentormentee = viewMentorMentee();
                         </select>
                     </div>
 
-                    <a href="view_addmentor.php" class="btn btn-success">Save</a>
+                    <button type="submit" name="saveMentorMentee" class="btn btn-success">Save</button>
+                    
                 </div>
             </div>
 
