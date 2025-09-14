@@ -9,7 +9,7 @@ $mentees = viewMentee();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <title>Mentor List</title>
+    <title>Mentee List</title>
 </head>
 
 <body>
@@ -42,13 +42,13 @@ $mentees = viewMentee();
                     <tbody>
                         <?php foreach ($mentees as $mentee1): ?>
                             <tr>
-                                <td><?= $mentee1['mentor_id'] ?></td>
+                                <td><?= $mentee1['mentee_id'] ?></td>
                                 <td><?= $mentee1['nama'] ?></td>
                                 <td><?= $mentee1['jurusan'] ?></td>
                                 <td><?= $mentee1['no_telepon'] ?></td>
                                 <td>
-                                    <a href="view_editmentor.php?updateID=<?=$mentee1['mentee_id']?>" class="btn btn-warning">Edit</a>
-                                    <a href="controller.php?deleteID=<?=$mentor1['mentee_id']?>"><button class="btn btn-danger" onclick="return confirm('Yakin mau hapus mentee ini?');">Delete</button></a>
+                                    <a href="view_editmentee.php?updateID=<?=$mentee1['mentee_id']?>" class="btn btn-warning">Edit</a>
+                                    <a href="controller.php?deleteID=<?=$mentee1['mentee_id']?>"><button class="btn btn-danger" onclick="return confirm('Yakin mau hapus mentee ini?');">Delete</button></a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
