@@ -12,7 +12,7 @@
     <div class="container p-3">
         <div class="card text-center">
             <div class="card-body">
-                <h1>New Mentor</h1>
+                <h1>Add Mentor</h1>
                 <form method="POST" action="controller.php">
                     <div class="mb-3">
                         <label for="inputName" class="form-label">Nama</label>
