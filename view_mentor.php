@@ -32,6 +32,7 @@ $mentors = viewMentor();
                 <h1>Mentor</h1>
                 <table class="table">
                     <thead class="table-dark">
+                        
                         <tr>
                             <th scope="col">ID</th>
                             <th scope="col">Nama</th>

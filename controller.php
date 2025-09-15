@@ -229,11 +229,10 @@ function viewMentorMentee()
 {
     $conn = my_connectDB(); // Create connection like other functions
 
-    $sql = "SELECT mentor.id, mentee.nama AS mentee_nama, mentor.nama AS mentor_nama
-            FROM mentee
-            INNER JOIN mentee ON mentor_mentee.mentee_id = mentee.mentee_id
-            INNER JOIN mentor ON mentor_mentee.mentor_id = mentor.mentor_id";
-
+    $sql = "SELECT me.nama AS mentee_nama, m.nama AS mentor_nama
+            FROM mentee me
+            JOIN mentor m ON me.mentor_id = m.mentor_id
+            WHERE me.mentor_id IS NOT NULL";
     $result = mysqli_query($conn, $sql);
 
     $mentorMenteeList = [];
@@ -250,18 +249,24 @@ function viewMentorMentee()
 // ---------------- SAVE PAIRING ----------------
 if (isset($_POST['saveMentorMentee'])) {
     $conn = my_connectDB();
-    $mentor_id = $_POST['mentor_id'];
-    $mentee_id = $_POST['mentee_id'];
+    $mentor_id = $_POST['mentor_id']; // id mentor yang dipilih
+    $mentee_id = $_POST['mentee_id']; // id mentee yang akan dipasangkan
 
-    // INSERT ke tabel relasi
-    $sql = "INSERT INTO mentor_mentee (mentor_id, mentee_id) VALUES ('$mentor_id', '$mentee_id')";
-    if (mysqli_query($conn, $sql)) {
-        mysqli_close($conn);
-        header("Location: view_mentorMentee.php"); // kembali ke halaman pairing
-        exit;
+    // Validasi input
+    if (!empty($mentor_id) && !empty($mentee_id)) {
+        // Update kolom mentor_id di tabel mentee
+        $sql = "UPDATE mentee SET mentor_id = ? WHERE mentee_id = ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, "ii", $mentor_id, $mentee_id);
+
+        if (mysqli_stmt_execute($stmt)) {
+            header("Location: view_mentee.php"); // redirect ke halaman tampilan mentee
+            exit;
+        } else {
+            echo "Error: " . mysqli_error($conn);
+        }
     } else {
-        echo "Error: " . mysqli_error($conn);
-        mysqli_close($conn);
+        echo "Mentor dan Mentee harus dipilih!";
     }
 }
 
@@ -280,3 +285,4 @@ if (isset($_POST['deleteMentorMentee'])) {
         mysqli_close($conn);
     }
 }
+?>
