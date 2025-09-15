@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 function my_connectDB()
 {
     $host = "localhost";
@@ -224,45 +227,56 @@ if (isset($_POST['button_updateMentee'])) {
 // ---------------- VIEW FUNCTION ----------------
 function viewMentorMentee()
 {
-    $conn = my_connectDB();
+    $conn = my_connectDB(); // Create connection like other functions
 
-    $sql = "SELECT mm.id, me.nama AS mentor_nama, mt.nama AS mentee_nama
-            FROM mentor_mentee mm
-            JOIN mentor me ON mm.mentor_id = me.mentor_id
-            JOIN mentee mt ON mm.mentee_id = mt.mentee_id";
+    $sql = "SELECT mentor.id, mentee.nama AS mentee_nama, mentor.nama AS mentor_nama
+            FROM mentee
+            INNER JOIN mentee ON mentor_mentee.mentee_id = mentee.mentee_id
+            INNER JOIN mentor ON mentor_mentee.mentor_id = mentor.mentor_id";
+
     $result = mysqli_query($conn, $sql);
-    $data = [];
-    while ($row = mysqli_fetch_assoc($result)) {
-        $data[] = $row;
+
+    $mentorMenteeList = [];
+    if ($result && mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $mentorMenteeList[] = $row;
+        }
     }
-    return $data;
+
+    mysqli_close($conn);
+    return $mentorMenteeList;
 }
 
 // ---------------- SAVE PAIRING ----------------
 if (isset($_POST['saveMentorMentee'])) {
+    $conn = my_connectDB();
     $mentor_id = $_POST['mentor_id'];
     $mentee_id = $_POST['mentee_id'];
 
     // INSERT ke tabel relasi
     $sql = "INSERT INTO mentor_mentee (mentor_id, mentee_id) VALUES ('$mentor_id', '$mentee_id')";
     if (mysqli_query($conn, $sql)) {
+        mysqli_close($conn);
         header("Location: view_mentorMentee.php"); // kembali ke halaman pairing
         exit;
     } else {
         echo "Error: " . mysqli_error($conn);
+        mysqli_close($conn);
     }
 }
 
 // ---------------- DELETE PAIRING ----------------
 if (isset($_POST['deleteMentorMentee'])) {
+    $conn = my_connectDB();
     $pair_id = $_POST['pair_id'];
 
     $sql = "DELETE FROM mentor_mentee WHERE id = '$pair_id'";
     if (mysqli_query($conn, $sql)) {
+        mysqli_close($conn);
         header("Location: view_mentorMentee.php");
         exit;
     } else {
         echo "Error: " . mysqli_error($conn);
+        mysqli_close($conn);
     }
 }
-?>

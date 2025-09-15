@@ -59,11 +59,9 @@ $mentormentee = viewMentorMentee();
                 </table>
                 <hr>
                 <!-- Form tambah pairing -->
-                <form method="POST" action="controller.php" class="d-flex flex-column align-items-center gap-3">
-
-                    <!-- Mentor -->
-                    <div class="d-flex align-items-center gap-2">
-                        <label class="fw-bold">Mentor</label>
+                <form method="POST" action="controller.php">
+                    <div class="d-flex justify-content-center align-items-center gap-3 pb-3">
+                        <h4>Mentor</h4>
                         <select class="form-select w-auto" name="mentor_id">
                             <?php foreach ($mentors as $m): ?>
                                 <option value="<?= $m['mentor_id'] ?>"><?= $m['nama'] ?></option>
@@ -71,18 +69,18 @@ $mentormentee = viewMentorMentee();
                         </select>
                     </div>
 
-                    <!-- Mentee -->
-                    <div class="d-flex align-items-center gap-2">
-                        <label class="fw-bold">Mentee</label>
+                    <div class="d-flex justify-content-center align-items-center gap-3 pb-3">
+                        <h4>Mentee</h4>
                         <select class="form-select w-auto" name="mentee_id">
-                            <?php foreach ($mentees as $me): ?>
-                                <option value="<?= $me['mentee_id'] ?>"><?= $me['nama'] ?></option>
+                            <?php foreach ($mentees as $m): ?>
+                                <option value="<?= $m['mentee_id'] ?>"><?= $m['nama'] ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
 
                     <button type="submit" name="saveMentorMentee" class="btn btn-success">Save</button>
                 </form>
+
             </div>
         </div>
     </div>
