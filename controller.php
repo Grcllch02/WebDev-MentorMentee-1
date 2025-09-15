@@ -266,7 +266,7 @@ if (isset($_POST['deleteMentorMentee'])) {
     $mentee_id = $_POST['mentee_id'] ?? null; // ambil mentee_id yang ingin dihapus relasinya
 
     if (!empty($mentee_id)) {
-        $conn = my_connectDB(); // pastikan koneksi ada
+        $conn = my_connectDB(); 
 
         // Update mentor_id menjadi NULL
         $sql = "UPDATE mentee SET mentor_id = NULL WHERE mentee_id = ?";
