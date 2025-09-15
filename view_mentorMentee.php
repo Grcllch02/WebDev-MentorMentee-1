@@ -31,7 +31,7 @@ $mentormentee = viewMentorMentee();
                 </ul>
             </div>
             <div class="card-body">
-                <h1>Mentor Mentee</h1>
+                <h1>Pairing Mentor Mentee</h1>
                 <!-- Table daftar pairing -->
                 <table class="table">
                     <thead class="table-dark">
@@ -48,14 +48,13 @@ $mentormentee = viewMentorMentee();
                         foreach ($mentormentee as $mm):
                             $counter++;
                         ?>
-
                             <tr>
                                 <td><?= $counter ?></td>
                                 <td><?= $mm['mentor_nama'] ?></td>
                                 <td><?= $mm['mentee_nama'] ?></td>
                                 <td>
                                     <form method="POST" action="controller.php" class="d-inline">
-
+                                        <input type="hidden" name="mentee_id" value="<?= $mm['mentee_id'] ?>">
                                         <button type="submit" name="deleteMentorMentee" class="btn btn-danger btn-sm">Delete</button>
                                     </form>
                                 </td>

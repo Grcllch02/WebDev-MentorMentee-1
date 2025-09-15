@@ -225,11 +225,9 @@ if (isset($_POST['button_updateMentee'])) {
 }
 
 // ---------------- VIEW FUNCTION ----------------
-function viewMentorMentee()
-{
-    $conn = my_connectDB(); // Create connection like other functions
-
-    $sql = "SELECT me.nama AS mentee_nama, m.nama AS mentor_nama
+function viewMentorMentee() {
+    $conn = my_connectDB();
+    $sql = "SELECT me.mentee_id, me.nama AS mentee_nama, m.nama AS mentor_nama
             FROM mentee me
             JOIN mentor m ON me.mentor_id = m.mentor_id
             WHERE me.mentor_id IS NOT NULL";
@@ -260,7 +258,7 @@ if (isset($_POST['saveMentorMentee'])) {
         mysqli_stmt_bind_param($stmt, "ii", $mentor_id, $mentee_id);
 
         if (mysqli_stmt_execute($stmt)) {
-            header("Location: view_mentee.php"); // redirect ke halaman tampilan mentee
+            header("Location: view_mentorMentee.php"); // redirect ke halaman tampilan mentee
             exit;
         } else {
             echo "Error: " . mysqli_error($conn);
@@ -272,17 +270,24 @@ if (isset($_POST['saveMentorMentee'])) {
 
 // ---------------- DELETE PAIRING ----------------
 if (isset($_POST['deleteMentorMentee'])) {
-    $conn = my_connectDB();
-    $pair_id = $_POST['pair_id'];
+    $mentee_id = $_POST['mentee_id'] ?? null; // ambil mentee_id yang ingin dihapus relasinya
 
-    $sql = "DELETE FROM mentor_mentee WHERE id = '$pair_id'";
-    if (mysqli_query($conn, $sql)) {
-        mysqli_close($conn);
-        header("Location: view_mentorMentee.php");
-        exit;
+    if (!empty($mentee_id)) {
+        $conn = my_connectDB(); // pastikan koneksi ada
+
+        // Update mentor_id menjadi NULL
+        $sql = "UPDATE mentee SET mentor_id = NULL WHERE mentee_id = ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, "i", $mentee_id);
+
+        if (mysqli_stmt_execute($stmt)) {
+            header("Location: view_mentorMentee.php"); // redirect ke halaman pairing
+            exit;
+        } else {
+            echo "Error: " . mysqli_error($conn);
+        }
     } else {
-        echo "Error: " . mysqli_error($conn);
-        mysqli_close($conn);
+        echo "Mentee ID tidak ditemukan!";
     }
 }
 ?>
