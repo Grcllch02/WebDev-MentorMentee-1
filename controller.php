@@ -236,4 +236,3 @@ if (isset($_POST['button_updateMentee'])) {
     updateMentee($id);
     header("Location:view_mentee.php");
 }
-?>
