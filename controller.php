@@ -15,8 +15,7 @@ function my_connectDB()
 include("model_mentor.php");
 include("model_mentee.php");
 
-function createMentor()
-{
+function createMentor(){
     $conn = my_connectDB();
 
     $mentor = new model_mentor();
@@ -39,8 +38,7 @@ if (isset($_POST['button_registerMentor'])) {
     header("Location:view_mentor.php");
 }
 
-function viewMentor()
-{
+function viewMentor(){
     $conn = my_connectDB();
 
     $sql = "SELECT * FROM mentor";
@@ -57,10 +55,8 @@ function viewMentor()
     return $mentorlist;
 }
 
-function deleteMentor($id)
-{
+function deleteMentor($id){
     $conn = my_connectDB();
-
     $sql = "DELETE from mentor WHERE mentor_id = $id";
 
     if (mysqli_query($conn, $sql)) {
@@ -77,8 +73,7 @@ if (isset($_GET['deleteID'])) {
     header("Location:view_mentor.php");
 }
 
-function getMentorWithID($mentorID)
-{
+function getMentorWithID($mentorID){
     $conn = my_connectDB();
 
     $sql = "SELECT * FROM mentor WHERE mentor_id = $mentorID";
@@ -93,16 +88,15 @@ function getMentorWithID($mentorID)
     return $mentor;
 }
 
-function updateMentor($mentor_id)
-{
+function updateMentor($mentor_id){
     $conn = my_connectDB();
 
-    $mentor = new model_mentor();
-    $mentor->nama = $_POST['inputNama'];
-    $mentor->jurusan = $_POST['inputJurusan'];
-    $mentor->no_tlpn = $_POST['inputTelepon'];
+    // $mentor = new model_mentor();
+    $nama = $_POST['inputNama'];
+    $jurusan = $_POST['inputJurusan'];
+    $no_tlpn = $_POST['inputTelepon'];
 
-    $sql = "UPDATE mentor set nama='$mentor->nama', jurusan='$mentor->jurusan', no_telepon='$mentor->no_tlpn' WHERE mentor_id = $mentor_id";
+    $sql = "UPDATE mentor set nama='$nama', jurusan='$jurusan', no_telepon='$no_tlpn' WHERE mentor_id = $mentor_id";
 
     if (mysqli_query($conn, $sql)) {
         mysqli_close($conn);
@@ -118,7 +112,7 @@ if (isset($_POST['button_updateMentor'])) {
 }
 
 
-
+// MENTEEEEEEEEEEEEEEEEEE
 function createMentee()
 {
     $conn = my_connectDB();
