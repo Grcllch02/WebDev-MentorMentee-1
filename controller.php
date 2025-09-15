@@ -226,10 +226,10 @@ function viewMentorMentee()
 {
     $conn = my_connectDB();
 
-    $sql = "SELECT mm.id, me.nama AS mentor_nama, mt.nama AS mentee_nama
-            FROM mentor_mentee mm
-            JOIN mentor me ON mm.mentor_id = me.mentor_id
-            JOIN mentee mt ON mm.mentee_id = mt.mentee_id";
+    $sql = "SELECT me.nama AS mentee_nama, m.nama AS mentor_nama
+            FROM mentee me
+            JOIN mentor m ON me.mentor_id = m.mentor_id
+            WHERE me.mentor_id IS NOT NULL";
     $result = mysqli_query($conn, $sql);
     $data = [];
     while ($row = mysqli_fetch_assoc($result)) {
@@ -240,16 +240,25 @@ function viewMentorMentee()
 
 // ---------------- SAVE PAIRING ----------------
 if (isset($_POST['saveMentorMentee'])) {
-    $mentor_id = $_POST['mentor_id'];
-    $mentee_id = $_POST['mentee_id'];
+    $conn = my_connectDB();
+    $mentor_id = $_POST['mentor_id']; // id mentor yang dipilih
+    $mentee_id = $_POST['mentee_id']; // id mentee yang akan dipasangkan
 
-    // INSERT ke tabel relasi
-    $sql = "INSERT INTO mentor_mentee (mentor_id, mentee_id) VALUES ('$mentor_id', '$mentee_id')";
-    if (mysqli_query($conn, $sql)) {
-        header("Location: view_mentorMentee.php"); // kembali ke halaman pairing
-        exit;
+    // Validasi input
+    if (!empty($mentor_id) && !empty($mentee_id)) {
+        // Update kolom mentor_id di tabel mentee
+        $sql = "UPDATE mentee SET mentor_id = ? WHERE mentee_id = ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, "ii", $mentor_id, $mentee_id);
+
+        if (mysqli_stmt_execute($stmt)) {
+            header("Location: view_mentee.php"); // redirect ke halaman tampilan mentee
+            exit;
+        } else {
+            echo "Error: " . mysqli_error($conn);
+        }
     } else {
-        echo "Error: " . mysqli_error($conn);
+        echo "Mentor dan Mentee harus dipilih!";
     }
 }
 

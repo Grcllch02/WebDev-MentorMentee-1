@@ -42,14 +42,19 @@ $mentormentee = viewMentorMentee();
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($mentormentee as $mm): ?>
+                        <?php 
+                        $counter = 0;
+                        foreach ($mentormentee as $mm): 
+                        $counter++; 
+                        ?>
+                            
                             <tr>
-                                <td><?= $mm['id'] ?></td>
+                                <td><?= $counter ?></td>
                                 <td><?= $mm['mentor_nama'] ?></td>
                                 <td><?= $mm['mentee_nama'] ?></td>
                                 <td>
                                     <form method="POST" action="controller.php" class="d-inline">
-                                        <input type="hidden" name="pair_id" value="<?= $mm['id'] ?>">
+                                        
                                         <button type="submit" name="deleteMentorMentee" class="btn btn-danger btn-sm">Delete</button>
                                     </form>
                                 </td>
