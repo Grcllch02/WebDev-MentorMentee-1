@@ -32,11 +32,10 @@ $mentormentee = viewMentorMentee();
             </div>
             <div class="card-body">
                 <h1>Pairing Mentor Mentee</h1>
-                <!-- Table daftar pairing -->
                 <table class="table">
                     <thead class="table-dark">
                         <tr>
-                            <th scope="col">ID</th>
+                            <th scope="col">No</th>
                             <th scope="col">Mentor</th>
                             <th scope="col">Mentee</th>
                             <th scope="col">Action</th>
