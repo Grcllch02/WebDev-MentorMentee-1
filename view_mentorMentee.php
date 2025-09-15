@@ -20,63 +20,72 @@ $mentormentee = viewMentorMentee();
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="true" href="view_mentor.php">Mentor List</a>
+                        <a class="nav-link" href="view_mentor.php">Mentor List</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="view_mentee.php">Mentee List</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link  active" href="view_mentorMentee.php">Mentor-Mentee</a>
+                        <a class="nav-link active" aria-current="true" href="view_mentorMentee.php">Mentor-Mentee</a>
                     </li>
                 </ul>
             </div>
             <div class="card-body">
-                <table class="table">
-                    <thead>
+                <!-- Table daftar pairing -->
+                <table class="table table-bordered mt-3">
+                    <thead class="table-primary">
                         <tr>
                             <th scope="col">ID</th>
                             <th scope="col">Mentor</th>
                             <th scope="col">Mentee</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($mentormentee as $mentormentee1): ?>
+                        <?php foreach ($mentormentee as $mm): ?>
                             <tr>
-                                <td><?= $mentormentee1['id'] ?></td>
-                                <td><?= $mentormentee1['mentor_nama'] ?></td>
-                                <td><?= $mentormentee1['mentee_nama'] ?></td>
+                                <td><?= $mm['id'] ?></td>
+                                <td><?= $mm['mentor_nama'] ?></td>
+                                <td><?= $mm['mentee_nama'] ?></td>
+                                <td>
+                                    <form method="POST" action="controller.php" class="d-inline">
+                                        <input type="hidden" name="pair_id" value="<?= $mm['id'] ?>">
+                                        <button type="submit" name="deleteMentorMentee" class="btn btn-danger btn-sm">Delete</button>
+                                    </form>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
                 <hr>
-                <div class="">
+                <!-- Form tambah pairing -->
+                <form method="POST" action="controller.php" class="d-flex flex-column align-items-center gap-3">
+
                     <!-- Mentor -->
-                    <div class="d-flex justify-content-center align-items-center gap-3 pb-3">
-                        <h4>Mentor</h4>
+                    <div class="d-flex align-items-center gap-2">
+                        <label class="fw-bold">Mentor</label>
                         <select class="form-select w-auto" name="mentor_id">
                             <?php foreach ($mentors as $m): ?>
                                 <option value="<?= $m['mentor_id'] ?>"><?= $m['nama'] ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
-                    <div class="d-flex justify-content-center align-items-center gap-3 pb-3">
-                        <h4>Mentee</h4>
-                        <!-- Mentee -->
+
+                    <!-- Mentee -->
+                    <div class="d-flex align-items-center gap-2">
+                        <label class="fw-bold">Mentee</label>
                         <select class="form-select w-auto" name="mentee_id">
-                            <?php foreach ($mentees as $m): ?>
-                                <option value="<?= $m['mentee_id'] ?>"><?= $m['nama'] ?></option>
+                            <?php foreach ($mentees as $me): ?>
+                                <option value="<?= $me['mentee_id'] ?>"><?= $me['nama'] ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
 
                     <button type="submit" name="saveMentorMentee" class="btn btn-success">Save</button>
-                    
-                </div>
+                </form>
             </div>
-
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-HoAqxH5j3rP8/Tf/N9H7HWhA7h1lQf5yDx5f+V3E5n7QZ6W8O4C1xA2X58Xj7gS2" crossorigin="anonymous"></script>
+    </div>
 </body>
 
 </html>

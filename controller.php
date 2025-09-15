@@ -114,24 +114,8 @@ if (isset($_POST['button_updateMentor'])) {
     header("Location:view_mentor.php");
 }
 
-function viewMentorMentee()
-{
-    $conn = my_connectDB();
 
-    $sql = "SELECT ms.id, m.nama AS mentor_nama, t.nama AS mentee_nama
-            FROM mentormentee ms
-            JOIN mentor m ON ms.mentor_id = m.mentor_id
-            JOIN mentee t ON ms.mentee_id = t.mentee_id";
-    $result = mysqli_query($conn, $sql);
 
-    $mentormenteelist = [];
-    if ($result && mysqli_num_rows($result) > 0) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            $mentormenteelist[] = $row;
-        }
-    }
-    return $mentormenteelist;
-}
 function createMentee()
 {
     $conn = my_connectDB();
@@ -236,3 +220,49 @@ if (isset($_POST['button_updateMentee'])) {
     updateMentee($id);
     header("Location:view_mentee.php");
 }
+
+// ---------------- VIEW FUNCTION ----------------
+function viewMentorMentee()
+{
+    $conn = my_connectDB();
+
+    $sql = "SELECT mm.id, me.nama AS mentor_nama, mt.nama AS mentee_nama
+            FROM mentor_mentee mm
+            JOIN mentor me ON mm.mentor_id = me.mentor_id
+            JOIN mentee mt ON mm.mentee_id = mt.mentee_id";
+    $result = mysqli_query($conn, $sql);
+    $data = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $data[] = $row;
+    }
+    return $data;
+}
+
+// ---------------- SAVE PAIRING ----------------
+if (isset($_POST['saveMentorMentee'])) {
+    $mentor_id = $_POST['mentor_id'];
+    $mentee_id = $_POST['mentee_id'];
+
+    // INSERT ke tabel relasi
+    $sql = "INSERT INTO mentor_mentee (mentor_id, mentee_id) VALUES ('$mentor_id', '$mentee_id')";
+    if (mysqli_query($conn, $sql)) {
+        header("Location: view_mentorMentee.php"); // kembali ke halaman pairing
+        exit;
+    } else {
+        echo "Error: " . mysqli_error($conn);
+    }
+}
+
+// ---------------- DELETE PAIRING ----------------
+if (isset($_POST['deleteMentorMentee'])) {
+    $pair_id = $_POST['pair_id'];
+
+    $sql = "DELETE FROM mentor_mentee WHERE id = '$pair_id'";
+    if (mysqli_query($conn, $sql)) {
+        header("Location: view_mentorMentee.php");
+        exit;
+    } else {
+        echo "Error: " . mysqli_error($conn);
+    }
+}
+?>
