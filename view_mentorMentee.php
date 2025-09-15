@@ -31,9 +31,10 @@ $mentormentee = viewMentorMentee();
                 </ul>
             </div>
             <div class="card-body">
+                <h1>Mentor Mentee</h1>
                 <!-- Table daftar pairing -->
-                <table class="table table-bordered mt-3">
-                    <thead class="table-primary">
+                <table class="table">
+                    <thead class="table-dark">
                         <tr>
                             <th scope="col">ID</th>
                             <th scope="col">Mentor</th>
@@ -42,19 +43,19 @@ $mentormentee = viewMentorMentee();
                         </tr>
                     </thead>
                     <tbody>
-                        <?php 
+                        <?php
                         $counter = 0;
-                        foreach ($mentormentee as $mm): 
-                        $counter++; 
+                        foreach ($mentormentee as $mm):
+                            $counter++;
                         ?>
-                            
+
                             <tr>
                                 <td><?= $counter ?></td>
                                 <td><?= $mm['mentor_nama'] ?></td>
                                 <td><?= $mm['mentee_nama'] ?></td>
                                 <td>
                                     <form method="POST" action="controller.php" class="d-inline">
-                                        
+
                                         <button type="submit" name="deleteMentorMentee" class="btn btn-danger btn-sm">Delete</button>
                                     </form>
                                 </td>
@@ -66,8 +67,8 @@ $mentormentee = viewMentorMentee();
                 <!-- Form tambah pairing -->
                 <form method="POST" action="controller.php">
                     <div class="d-flex justify-content-center align-items-center gap-3 pb-3">
-                        <h4>Mentor</h4>
-                        <select class="form-select w-auto" name="mentor_id">
+                        <h4 class="fs-6 mb-0">Mentor</h4>
+                        <select class="form-select w-25" name="mentor_id">
                             <?php foreach ($mentors as $m): ?>
                                 <option value="<?= $m['mentor_id'] ?>"><?= $m['nama'] ?></option>
                             <?php endforeach; ?>
@@ -75,8 +76,8 @@ $mentormentee = viewMentorMentee();
                     </div>
 
                     <div class="d-flex justify-content-center align-items-center gap-3 pb-3">
-                        <h4>Mentee</h4>
-                        <select class="form-select w-auto" name="mentee_id">
+                        <h4 class="fs-6 mb-0">Mentee</h4>
+                        <select class="form-select w-25" name="mentee_id">
                             <?php foreach ($mentees as $m): ?>
                                 <option value="<?= $m['mentee_id'] ?>"><?= $m['nama'] ?></option>
                             <?php endforeach; ?>
