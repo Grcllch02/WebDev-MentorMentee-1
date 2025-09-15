@@ -197,12 +197,11 @@ function updateMentee($mentee_id)
 {
     $conn = my_connectDB();
 
-    $mentee = new model_mentee();
-    $mentee->nama = $_POST['inputNama'];
-    $mentee->jurusan = $_POST['inputJurusan'];
-    $mentee->no_tlpn = $_POST['inputTelepon'];
+    $nama = $_POST['inputNama'];
+    $jurusan = $_POST['inputJurusan'];
+    $no_tlpn = $_POST['inputTelepon'];
 
-    $sql = "UPDATE mentee set nama='$mentee->nama', jurusan='$mentee->jurusan', no_telepon='$mentee->no_tlpn' WHERE mentee_id = $mentee_id";
+    $sql = "UPDATE mentee set nama='$nama', jurusan='$jurusan', no_telepon='$no_tlpn' WHERE mentee_id = $mentee_id";
 
     if (mysqli_query($conn, $sql)) {
         mysqli_close($conn);
