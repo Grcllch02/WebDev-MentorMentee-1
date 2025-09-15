@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 function my_connectDB()
 {
     $host = "localhost";
@@ -229,11 +232,16 @@ function viewMentorMentee() {
             JOIN mentor m ON me.mentor_id = m.mentor_id
             WHERE me.mentor_id IS NOT NULL";
     $result = mysqli_query($conn, $sql);
-    $data = [];
-    while ($row = mysqli_fetch_assoc($result)) {
-        $data[] = $row;
+
+    $mentorMenteeList = [];
+    if ($result && mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $mentorMenteeList[] = $row;
+        }
     }
-    return $data;
+
+    mysqli_close($conn);
+    return $mentorMenteeList;
 }
 
 // ---------------- SAVE PAIRING ----------------
