@@ -16,10 +16,10 @@
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs">
                     <li class="nav-item">
-                        <a class="nav-link " aria-current="true" href="view_mentor.php">Mentor List</a>
+                        <a class="nav-link " href="view_mentor.php">Mentor List</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="view_mentee.php">Mentee List</a>
+                        <a class="nav-link active" aria-current="true" href="view_mentee.php">Mentee List</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="view_mentorMentee.php">Mentor-Mentee</a>
