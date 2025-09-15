@@ -245,13 +245,12 @@ if (isset($_POST['saveMentorMentee'])) {
 
     // Validasi input
     if (!empty($mentor_id) && !empty($mentee_id)) {
-        // Update kolom mentor_id di tabel mentee
         $sql = "UPDATE mentee SET mentor_id = ? WHERE mentee_id = ?";
         $stmt = mysqli_prepare($conn, $sql);
         mysqli_stmt_bind_param($stmt, "ii", $mentor_id, $mentee_id);
 
         if (mysqli_stmt_execute($stmt)) {
-            header("Location: view_mentorMentee.php"); // redirect ke halaman tampilan mentee
+            header("Location: view_mentorMentee.php"); 
             exit;
         } else {
             echo "Error: " . mysqli_error($conn);
@@ -263,18 +262,18 @@ if (isset($_POST['saveMentorMentee'])) {
 
 // ---------------- DELETE PAIRING ----------------
 if (isset($_POST['deleteMentorMentee'])) {
-    $mentee_id = $_POST['mentee_id'] ?? null; // ambil mentee_id yang ingin dihapus relasinya
+    $mentee_id = $_POST['mentee_id'] ?? null; // ambil mentee_id yang mau dihapus relasinya
 
     if (!empty($mentee_id)) {
         $conn = my_connectDB(); 
 
-        // Update mentor_id menjadi NULL
+        // Update mentor_id jadi NULL
         $sql = "UPDATE mentee SET mentor_id = NULL WHERE mentee_id = ?";
         $stmt = mysqli_prepare($conn, $sql);
         mysqli_stmt_bind_param($stmt, "i", $mentee_id);
 
         if (mysqli_stmt_execute($stmt)) {
-            header("Location: view_mentorMentee.php"); // redirect ke halaman pairing
+            header("Location: view_mentorMentee.php"); 
             exit;
         } else {
             echo "Error: " . mysqli_error($conn);
